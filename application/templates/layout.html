@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        {% block title %}Elpris{% endblock %}
-    </title>
+    <title>{% block title %}Elpris{% endblock %}</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet"> <!-- Lägg till länken till ditt CSS-fil -->
 </head>
 <body>
 <div id="header">
@@ -19,5 +18,6 @@
     <!--{% block footer %}{% include "footer.html" %}{% endblock %} -->
 </div>
 <script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/script.js"></script> <!-- Lägg till länken till ditt JavaScript-fil (om du har en) -->
 </body>
 </html>
