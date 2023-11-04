@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block title %}Elpriser{% endblock %}
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="col-10 border p-3 text-center" style="max-width: 600px;">
+        <h1>Vad kostar elen?</h1>
+        <form action="/elpriser" method="post">
+            <div>
+                <label for="selectedDate">Datum:</label><br/>
+                <input type="date" id="selectedDate" name="selectedDate">
+            </div>
+            <label for="price">Prisklass:</label><br/>
+            <input type="text" id="price" name="PRISKLASS"><br/>
+            <button type="submit" class="btn btn-primary mt-3">Kolla priset!</button>
+        </form>
+
+        {% if year %}
+        <div>
+            <h4>Valt datum:</h4>
+            <p>{{ selected_date }}</p>
+        </div>
+        {% endif %}
+
+        {% if data %}
+        <div>
+            <h4>Prisinformation:</h4>
+            <p>SEK per kWh: {{ data[0].SEK_per_kWh }}</p>
+            <p>EUR per kWh: {{ data[0].EUR_per_kWh }}</p>
+            <p>EXR: {{ data[0].EXR }}</p>
+            <p>time start: {{ data[0].time_start }}</p>
+            <p>time end: {{ data[0].time_end }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

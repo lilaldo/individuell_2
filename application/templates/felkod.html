@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Form{% endblock %}
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="col-10 border p-3 text-center" style="max-width: 600px;">
+        <h1>Vad kostar elen?</h1>
+        <form action="/felkod" method="post">
+            <div>
+                <label for="selectedDate">Välj ett datum:</label><br/>
+                <input type="date" id="selectedDate" name="selectedDate">
+            </div>
+            <label for="price">Prisklass:</label><br/>
+            <input type="text" id="price" name="PRISKLASS"><br/>
+            <button type="submit" class="btn btn-primary mt-3">Kolla priset!</button>
+        </form>
+
+        {% if year %}
+        <div>
+            <h3>Valt datum:</h3>
+            <p>Ogiltig inmatning.</p>
+            <p>Som tidigast kan du söka från 2022-11-01 och som senast en dag fram i tiden.</p>
+            <p>Giltiga Prisklasser:</p>
+            <ul>SE1 = Luleå / Norra Sverige</ul>
+            <ul>SE2 = Sundsvall / Norra Mellansverige</ul>
+            <ul>SE3 = Stockholm / Södra Mellansverige</ul>
+            <ul>SE4 = Malmö / Södra Sverige</ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
