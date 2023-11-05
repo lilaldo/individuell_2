@@ -25,6 +25,30 @@
             <ul>SE3 = Stockholm / Södra Mellansverige</ul>
             <ul>SE4 = Malmö / Södra Sverige</ul>
         </div>
+        {% else %}
+        {% if data %}
+        <div>
+            <h3>Elpriser:</h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Prisklass</th>
+                    <th>Pris (SEK/kWh)</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entry in data %}
+                <tr>
+                    <td>{{ entry.date }}</td>
+                    <td>{{ entry.price_class }}</td>
+                    <td>{{ entry.price }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
         {% endif %}
     </div>
 </div>
