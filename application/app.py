@@ -52,6 +52,7 @@ def api_post():
         return render_template('form.html')
 
 
+# Skulle användaren komma till en okänd endpoint så visas ett meddelande samt en knapp för att ta sig tillbaka
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
