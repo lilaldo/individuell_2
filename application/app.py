@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import requests
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def api_post():
             response = requests.get(api_url)
             if response.status_code == 200:
                 data = response.json()
-                return render_template('form.html', data=data, selected_date=selected_date, year=year)
+                return render_template('form.html', data=data, selected_date=selected_date, year=year, price=price)
             else:
                 api_error = True  # Sätt flaggvariabeln till True om API-anropet misslyckades
         except requests.exceptions.RequestException as e:

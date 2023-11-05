@@ -13,24 +13,30 @@
             <input type="text" id="price" name="PRISKLASS"><br/>
             <button type="submit" class="btn btn-primary mt-3">Kolla priset!</button>
         </form>
-
         {% if year %}
         <div>
             <h4>Valt datum:</h4>
-            <p>{{ selected_date }}</p>
+            <p>{{ selected_date }} med prisklass {{ price }}</p>
         </div>
         {% endif %}
-
         {% if data %}
         <div>
             <h4>Prisinformation:</h4>
-            <p>SEK per kWh: {{ data[0].SEK_per_kWh }}</p>
-            <p>EUR per kWh: {{ data[0].EUR_per_kWh }}</p>
-            <p>EXR: {{ data[0].EXR }}</p>
-            <p>time start: {{ data[0].time_start }}</p>
-            <p>time end: {{ data[0].time_end }}</p>
+            <ul>
+                {% for price_info in data %}
+                <li>
+                    <p>Tidsintervall: {{ price_info.time_start[11:16] }}
+                    - {{ price_info.time_end[11:16] }}</p>
+                    <p>SEK per kWh: {{ price_info.SEK_per_kWh }}</p>
+                    <p>EUR per kWh: {{ price_info.EUR_per_kWh }}</p>
+                    <p>EXR: {{ price_info.EXR }}</p>
+                </li>
+                <p> </p>
+                {% endfor %}
+            </ul>
         </div>
         {% endif %}
     </div>
 </div>
 {% endblock %}
+
