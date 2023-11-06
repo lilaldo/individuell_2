@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block title %}Elpriser{% endblock %}
-
 {% block content %}
 <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh; display: flex; justify-content: center;">
     <div class="col-10 border p-3 text-center" style="max-width: 100%; padding: 0; background-color: rgba(255, 255, 255, 0.9); margin: 0;">
@@ -35,7 +34,7 @@
                     {% for price_info in data %}
                     <!-- Gör det möjligt för användaren att hålla musen över staplarna för att se information om priser -->
                     <div class="timeline-item">
-                        <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 500 }}px;"
+                        <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 450 }}px;"
                              title="SEK per kWh: {{ price_info.SEK_per_kWh }}.
                              EUR per kWh: {{ price_info.EUR_per_kWh }}.
                              EXR: {{ price_info.EXR }}">
