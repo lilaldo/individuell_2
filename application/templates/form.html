@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Elpriser{% endblock %}
+
 {% block content %}
 <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh; display: flex; justify-content: center;">
-    <div class="col-10 border p-3 text-center" style="max-width: 100%; padding: 0;">
+    <div class="col-10 border p-3 text-center" style="max-width: 100%; padding: 0; background-color: rgba(255, 255, 255, 0.9); margin: 0;">
+        <!-- Huvudrubriken för sidan som visas högst upp. -->
         <h1>Vad kostar elen?</h1>
+
+        <!-- Formulär där användaren får skriva in datum från en kalender och sedan prisklass. -->
         <form action="/elpriser" method="post">
             <div>
                 <label for="selectedDate">Datum:</label><br/>
@@ -13,17 +17,24 @@
             <input type="text" id="price" name="PRISKLASS"><br/>
             <button type="submit" class="btn btn-primary mt-3">Kolla priset!</button>
         </form>
+
+        <!-- Visa valt datum och prisklass om det har valts -->
         {% if year %}
         <div>
             <h5>Valt datum:</h5>
             <p>{{ selected_date }} med prisklass {{ price }}</p>
         </div>
         {% endif %}
+
+        <!-- Visa prisinformation om det finns tillgänglig data -->
         {% if data %}
         <div>
             <h5>Prisinformation:</h5>
+            <!-- En hjälptext som instruerar användaren att hålla musen över tidsspännena för mer information -->
+            <p>Håll musen över valt tidsspann för mer information!</p>
             <div class="bar-chart">
                 <div class="timeline">
+                    <!-- Iterera genom prisdata och skapa en tidslinje för varje datapunkt -->
                     {% for price_info in data %}
                     <div class="timeline-item">
                         <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 500 }}px;"
@@ -42,8 +53,8 @@
         {% endif %}
     </div>
 </div>
-<style>
 
+<style>
     .bar-chart {
         display: flex;
         flex-direction: column;
@@ -70,7 +81,6 @@
         background-color: #007bff;
         width: 20px;
     }
-
 </style>
 {% endblock %}
 
