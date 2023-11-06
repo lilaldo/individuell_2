@@ -2,14 +2,14 @@
 {% block title %}Elpriser{% endblock %}
 {% block content %}
 <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
-    <div class="col-10 border p-3 text-center" style="max-width: 600px;">
+    <div class="col-10 border p-3 text-center" style="max-width: 2000px;">
         <h1>Vad kostar elen?</h1>
         <form action="/elpriser" method="post">
             <div>
                 <label for="selectedDate">Datum:</label><br/>
                 <input type="date" id="selectedDate" name="selectedDate">
             </div>
-            <label for="price">Prisklass:</label><br/>
+            <label for "price">Prisklass:</label><br/>
             <input type="text" id="price" name="PRISKLASS"><br/>
             <button type="submit" class="btn btn-primary mt-3">Kolla priset!</button>
         </form>
@@ -20,22 +20,61 @@
         </div>
         {% endif %}
         {% if data %}
-        <div>
-            <h4>Prisinformation:</h4>
-            <ul>
+        <h4>Prisinformation:</h4>
+        <div class="center-text"> {# Centrerar texten #}
+            <div class="timeline">
+                <div class="timeline-header">
+                    <div class="timeline-item">Tidsintervall</div>
+                    <div class="timeline-content">SEK per kWh</div>
+                    <div class="timeline-content">EUR per kWh</div>
+                    <div class="timeline-content">EXR</div>
+                </div>
                 {% for price_info in data %}
-                <li>
-                    <p>Tidsintervall: {{ price_info.time_start[11:16] }}
-                    - {{ price_info.time_end[11:16] }}</p>
-                    <p>SEK per kWh: {{ price_info.SEK_per_kWh }}</p>
-                    <p>EUR per kWh: {{ price_info.EUR_per_kWh }}</p>
-                    <p>EXR: {{ price_info.EXR }}</p>
-                </li>
+                <div class="timeline-row">
+                    <div class="timeline-item">{{ price_info.time_start[11:16] }}-{{ price_info.time_end[11:16] }}</div>
+                    <div class="timeline-content">{{ price_info.SEK_per_kWh }}</div>
+                    <div class="timeline-content">{{ price_info.EUR_per_kWh }}</div>
+                    <div class="timeline-content">{{ price_info.EXR }}</div>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
         {% endif %}
     </div>
 </div>
-{% endblock %}
+<style>
+    .timeline {
+        display: grid;
+        grid-template-columns: repeat(25, 1fr);
+        grid-gap: 5px;
+    }
 
+    .timeline-header {
+        font-weight: bold;
+    }
+
+    .timeline-item {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .timeline-content {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .timeline-row {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 5px;
+    }
+
+    .center-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
