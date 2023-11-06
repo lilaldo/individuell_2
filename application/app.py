@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 
 app = Flask(__name__)
@@ -57,6 +57,9 @@ def api_post():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.errorhandler(IndexError)
+def indexerror(e):
+    return render_template('felkod.html')
 
 
 if __name__ == "__main__":
