@@ -28,22 +28,22 @@ def api_post():
         api_url = f"https://www.elprisetjustnu.se/api/v1/prices/{formatted_date}_{price}.json"
 
         try:
-            # Försök att göra en HTTP GET-förfrågan till den externa API-tjänsten med den tidigare konstruerade URL:en.
+            # Gör en GET-förfrågan till api med den f-strängade URL:en.
             response = requests.get(api_url)
-            # Kontrollera om svarskoden är 200 (OK).
+            # Kontrollerar att svarskoden är 200, det vill säga OK.
             if response.status_code == 200:
                 # Om svarskoden är 200, hämta JSON-data från API-svaret.
                 data = response.json()
-                # Användaren tas till form.html med data från API-svaret samt valt datum, år och prisklass.
+                # Användaren tas till form.html med data från API-svaret samt valt datum och prisklass.
                 return render_template('form.html', data=data, selected_date=selected_date, year=year, price=price)
             else:
-                # Om svarskoden inte är 200, markera att API-anropet misslyckades genom att sätta en flaggvariabel (api_error) till True.
+                # Om svarskoden inte är 200 markeras api_error som True.
                 api_error = True
         except requests.exceptions.RequestException as e:
-            # Om det uppstår ett fel (exception) under API-anropet, markera att API-anropet misslyckades genom att sätta flaggvariabeln (api_error) till True.
+            # Om svarskoden inte är 200 markeras api_error som True.
             api_error = True
 
-        # Om API-anropet misslyckades (api_error är True), returnera en felmeddelandesida ('felkod.html') istället av standardformuläret.
+        # Om api_error blir True tas användaren till endpoint för errors och får där hjälp.
         if api_error:
             return render_template('felkod.html', year=year, error_message="API-anropet misslyckades")
 
@@ -52,14 +52,18 @@ def api_post():
         return render_template('form.html')
 
 
+
+"""I den här delen tas olika former av error hand om. 
+Bland annat om användaren skulle komma till en okänd endpoint eller skriva in ogiltig information."""
 # Skulle användaren komma till en okänd endpoint så visas ett meddelande samt en knapp för att ta sig tillbaka
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
+# Om användaren på något sätt skriver datumet eller prisklassen på ett ogiltigt sätt.
 @app.errorhandler(IndexError)
 def indexerror(e):
-    return render_template('felkod.html')
+    return render_template('felkod.html'),
 
 
 if __name__ == "__main__":
