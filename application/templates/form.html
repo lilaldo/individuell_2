@@ -15,13 +15,13 @@
         </form>
         {% if year %}
         <div>
-            <h4>Valt datum:</h4>
+            <h5>Valt datum:</h5>
             <p>{{ selected_date }} med prisklass {{ price }}</p>
         </div>
         {% endif %}
         {% if data %}
         <div>
-            <h4>Prisinformation:</h4>
+            <h5>Prisinformation:</h5>
             <div class="bar-chart">
                 <div class="timeline">
                     {% for price_info in data %}
