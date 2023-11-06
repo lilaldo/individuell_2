@@ -26,7 +26,10 @@
                 <div class="timeline">
                     {% for price_info in data %}
                     <div class="timeline-item">
-                        <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 500 }}px;" title="SEK per kWh: {{ price_info.SEK_per_kWh }}, EUR per kWh: {{ price_info.EUR_per_kWh }}, EXR: {{ price_info.EXR }}">
+                        <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 500 }}px;"
+                             title="SEK per kWh: {{ price_info.SEK_per_kWh }}.
+                             EUR per kWh: {{ price_info.EUR_per_kWh }}.
+                             EXR: {{ price_info.EXR }}">
                         </div>
                         <div class="timeline-label" title="Tid: {{ price_info.time_start[11:16] }} {{ price_info.time_end[11:16] }}">
                             {{ price_info.time_start[11:16] }} {{ price_info.time_end[11:16] }}

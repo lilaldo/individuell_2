@@ -6,6 +6,44 @@
     <title>{% block title %}Elpris{% endblock %}</title>
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/styles.css" rel="stylesheet"> <!-- Lägg till länken till ditt CSS-fil -->
+    <div id="background-slideshow"></div>
+    <style>
+        #background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            animation: slideshow 120s infinite; /* 120s är tidsintervallet mellan bildändringar (20 sekunder per bild) */
+            background-size: cover; /* Bilden anpassar sig och täcker hela bakgrunden */
+            background-repeat: no-repeat;
+        }
+                @keyframes slideshow {
+            0% {
+                background-image: url("/static/images/electricity-4666566.jpg");
+            }
+            14.28% {
+                background-image: url("/static/images/sunset-3442835.jpg");
+            }
+            28.57% {
+                background-image: url("/static/images/light-bulbs-1603766.jpg");
+            }
+            42.85% {
+                background-image: url("/static/images/nuclear-power-plant-4535760.jpg");
+            }
+            57.14% {
+                background-image: url("/static/images/photovoltaic-2138992.jpg");
+            }
+            71.42% {
+                background-image: url("/static/images/light-bulb-4297386.jpg");
+            }
+            85.71% {
+                background-image: url("/static/images/windmills-7001940.jpg");
+            }
+        }
+        </style>
+
 </head>
 <body>
 <div id="header">
