@@ -20,61 +20,50 @@
         </div>
         {% endif %}
         {% if data %}
-        <h4>Prisinformation:</h4>
-        <div class="center-text"> {# Centrerar texten #}
-            <div class="timeline">
-                <div class="timeline-header">
-                    <div class="timeline-item">Tidsintervall</div>
-                    <div class="timeline-content">SEK per kWh</div>
-                    <div class="timeline-content">EUR per kWh</div>
-                    <div class="timeline-content">EXR</div>
+        <div>
+            <h4>Prisinformation:</h4>
+            <div class="bar-chart">
+                <div class="timeline">
+                    {% for price_info in data %}
+                    <div class="timeline-item">
+                        <div class="bar-fill" style="height: {{ price_info.SEK_per_kWh * 200 }}px;"></div>
+                        <div class="timeline-label">
+                            {{ price_info.time_start[11:16] }}-{{ price_info.time_end[11:16] }}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% for price_info in data %}
-                <div class="timeline-row">
-                    <div class="timeline-item">{{ price_info.time_start[11:16] }}-{{ price_info.time_end[11:16] }}</div>
-                    <div class="timeline-content">{{ price_info.SEK_per_kWh }}</div>
-                    <div class="timeline-content">{{ price_info.EUR_per_kWh }}</div>
-                    <div class="timeline-content">{{ price_info.EXR }}</div>
-                </div>
-                {% endfor %}
             </div>
         </div>
         {% endif %}
     </div>
 </div>
 <style>
-    .timeline {
-        display: grid;
-        grid-template-columns: repeat(25, 1fr);
-        grid-gap: 5px;
+    .bar-chart {
+        display: flex;
+        flex-direction: column;
     }
 
-    .timeline-header {
-        font-weight: bold;
+    .timeline {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
     }
 
     .timeline-item {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .timeline-content {
-        border: 1px solid #ccc;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .timeline-row {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 5px;
-    }
-
-    .center-text {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+    }
+
+    .timeline-label, .bar-fill {
+        width: 57px;
+        text-align: center;
+    }
+
+    .bar-fill {
+        background-color: #007bff;
+        width: 20px;
     }
 </style>
 {% endblock %}
