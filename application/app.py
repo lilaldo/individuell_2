@@ -4,6 +4,8 @@ import requests
 app = Flask(__name__)
 
 """Startsida. Fungerar på samma sätt som /elpriser men att man som användaren kommer till en tom sida ger ett mer städat intryck."""
+
+
 @app.route("/")
 @app.route("/start")
 def startsida():
@@ -12,6 +14,8 @@ def startsida():
 
 """Här definieras en route som svarar på både POST- och GET-förfrågningar till endpointen "/elpriser". 
 Denna funktion kommer att köras oavsett om det är en POST- eller GET-förfrågan till denna URL."""
+
+
 @app.route("/elpriser", methods=["POST", "GET"])
 def api_post():
     # Koden kollas om den inkommande förfrågan är en http post, i sådana fall fortsätter koden köras.
@@ -52,19 +56,26 @@ def api_post():
         return render_template('form.html')
 
 
+# Felhantering
 
 """I den här delen tas olika former av error hand om. 
 Bland annat om användaren skulle komma till en okänd endpoint eller skriva in ogiltig information."""
+
+
 # Skulle användaren komma till en okänd endpoint så visas ett meddelande samt en knapp för att ta sig tillbaka
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
 # Om användaren på något sätt skriver datumet eller prisklassen på ett ogiltigt sätt.
 @app.errorhandler(IndexError)
 def indexerror(e):
-    return render_template('felkod.html'),
+    return render_template('felkod.html'), 404
 
+
+"""Det svåraste med denna delen var att komma fram till logiken felhantering kontra kod."""
+"""Satt i timmar och försökte hitta ett fail i pytest till index-error, det visade sig att jag glömt skriva 404 efter"""
 
 if __name__ == "__main__":
     app.run(debug=True)
